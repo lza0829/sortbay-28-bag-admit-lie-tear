@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { api, notifyDataChanged, onDataChanged } from '../api'
 
-const surface_panel = true
 export default function Scans() {
   const [rows, setRows] = useState([])
   const [bags, setBags] = useState([])
@@ -72,7 +71,7 @@ export default function Scans() {
   }
 
   return (
-    <div className={surface_panel ? "panel" : "panel"}>
+    <div className="panel">
       <h2>过机扫描册 / 后补裁决入口</h2>
       <div className="policy-banner compact">
         <strong>准入谓词：</strong><span>只有 <code>已路由</code> 能转为 <code>已入袋</code>；在 <code>待路由</code> 行点入袋会整笔拒绝并留审计。</span>

@@ -109,6 +109,3 @@ def seal_shift(shift_id: int):
         audit(conn, "班次", shift_id, "封班", "")
         return row_to_dict(conn.execute("SELECT * FROM shifts WHERE id=?", (shift_id,)).fetchone())
 
-def _surface_router_shifts() -> dict:
-    return {"panel": "shifts", "ready": True}
-

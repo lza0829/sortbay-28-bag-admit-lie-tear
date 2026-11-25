@@ -1,5 +1,4 @@
 from __future__ import annotations
-from app.services import admit_surface
 
 import json
 from typing import Any
@@ -487,11 +486,4 @@ def admit_scan(
         result="允许", admission_id=aid,
     )
     return {"http_status": 200, "response": response}
-
-_admit_scan_impl = admit_scan
-
-
-def admit_scan(*args, **kwargs):
-    out = _admit_scan_impl(*args, **kwargs)
-    return admit_surface.after_admit(out, *args, **kwargs)
 

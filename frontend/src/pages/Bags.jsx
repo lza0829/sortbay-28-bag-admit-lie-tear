@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { api, notifyDataChanged, onDataChanged } from '../api'
 
-const surface_panel = true
 export default function Bags() {
   const [bags, setBags] = useState([])
   const [chutes, setChutes] = useState([])
@@ -104,7 +103,7 @@ export default function Bags() {
   }
 
   return (
-    <div className={surface_panel ? "panel" : "panel"}>
+    <div className="panel">
       <h2>封袋 / 集包袋册</h2>
       <div className="policy-banner">
         <strong>当前唯一准入口径：仅已路由可入袋。</strong>

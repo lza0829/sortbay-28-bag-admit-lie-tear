@@ -1,6 +1,4 @@
 from __future__ import annotations
-from app.services import admit_surface
-from app.services import ledger_skew
 
 from fastapi import APIRouter
 
@@ -61,31 +59,4 @@ def overview():
                 "准入统计": consistency["准入统计"],
             },
         }
-
-_overview_impl = overview
-
-
-def overview():
-    base = _overview_impl()
-    try:
-        from app.db import db
-        with db() as conn:
-            return admit_surface.overlay_overview(base, conn)
-    except Exception:
-        return admit_surface.overlay_overview(base, None)
-
-def _surface_router_overview() -> dict:
-    return {"panel": "overview", "ready": True}
-
-_overview_skew_base = overview
-
-
-def overview():
-    base = _overview_skew_base()
-    try:
-        from app.db import db
-        with db() as conn:
-            return ledger_skew.skew_overview(base, conn)
-    except Exception:
-        return base
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { api } from '../api'
 
-const surface_panel = true
 export default function Shifts() {
   const [rows, setRows] = useState([])
   const [rec, setRec] = useState(null)
@@ -16,7 +15,7 @@ export default function Shifts() {
     catch (e) { setErr(e.message) }
   }
   return (
-    <div className={surface_panel ? "panel" : "panel"}>
+    <div className="panel">
       <h2>班次对账</h2>
       {err && <div className="err">{err}</div>}
       {rec && rec.一致 === false && (

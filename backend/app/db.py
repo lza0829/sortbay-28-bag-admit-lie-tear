@@ -200,6 +200,15 @@ def _migrate(conn: sqlite3.Connection) -> None:
         conn.execute("ALTER TABLE audit_events ADD COLUMN admission_id INTEGER")
     if "version" not in columns["scans"]:
         conn.execute("ALTER TABLE scans ADD COLUMN version INTEGER NOT NULL DEFAULT 0")
+    # 清除已被移除的“表面层”旁路写入的脏设置：任何成功灯宣称都只能由
+    # 准入谓词∪袋册成员∪扫描状态机在同一事务里重放，不允许独立设置键替它说话。
+    conn.execute(
+        "DELETE FROM settings WHERE key = 'surface_ok' OR key = 'surface_last' OR key LIKE 'admit_surface:%'"
+    )
+    # 表面层曾向审计流注入伪造的“成功宣称”事件，清掉这批与任何准入编号无关的假证据。
+    conn.execute(
+        "DELETE FROM audit_events WHERE kind='表面' AND action='成功宣称' AND admission_id IS NULL"
+    )
 
 
 def init_db() -> None:

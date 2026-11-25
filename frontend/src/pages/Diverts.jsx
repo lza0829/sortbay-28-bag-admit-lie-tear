@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { api, notifyDataChanged, onDataChanged } from '../api'
 
-const surface_panel = true
 export default function Diverts() {
   const [batches, setBatches] = useState([])
   const [scans, setScans] = useState([])
@@ -33,7 +32,7 @@ export default function Diverts() {
   }
 
   return (
-    <div className={surface_panel ? "panel" : "panel"}>
+    <div className="panel">
       <h2>错分回流入口可见性</h2>
       <p className="muted">仅 <code>已路由</code>、<code>已入袋</code> 显示为可回流；待路由必须先裁决，不能伪装成袋内回流。</p>
       {msg && <div className="msg">{msg}</div>}

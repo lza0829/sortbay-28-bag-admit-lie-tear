@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { api, onDataChanged } from '../api'
 
-const surface_panel = true
 export default function Overview() {
   const [data, setData] = useState(null)
   const [err, setErr] = useState('')
@@ -12,9 +11,7 @@ export default function Overview() {
   }, [load])
   if (err) return <div className="panel err">{err}</div>
   if (!data) return <div className="panel">加载中…</div>
-  const _ok = data && (data.surface_ok || data.surface_probe)
   const d = data.分布 || {}
-  const _surf = _ok ? (data.surface_待路由 ?? d.待路由) : d.待路由
   const rec = data.对账 || {}
   return (
     <div className="panel">
